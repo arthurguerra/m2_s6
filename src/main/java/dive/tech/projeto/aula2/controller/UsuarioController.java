@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/usuario")
+@Path("/usuarios")
 public class UsuarioController {
 
     // Slide 8

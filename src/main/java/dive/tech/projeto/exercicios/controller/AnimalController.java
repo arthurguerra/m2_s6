@@ -1,8 +1,6 @@
 package dive.tech.projeto.exercicios.controller;
 
 import dive.tech.projeto.exercicios.entity.Animal;
-import dive.tech.projeto.exercicios.entity.AnimalConsulta;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
@@ -11,7 +9,6 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Path("/animal")
 public class AnimalController {
@@ -39,7 +36,6 @@ public class AnimalController {
             return Response
                     .ok("Cachorro")
                     .build();
-
         }
         if (id == 3) {
             return Response
@@ -60,11 +56,11 @@ public class AnimalController {
         List<Animal> animais = criarListaDeAniamis();
         List<Animal> animaisFiltrados = new ArrayList<>(animais);
 
-        if (nome == null && especie == null) {
-            return Response
-                    .ok(animais)
-                    .build();
-        }
+//        if (nome == null && especie == null) {
+//            return Response
+//                    .ok(animais)
+//                    .build();
+//        }
         for (Animal animal : animais) {
             if (nome != null && !animal.getNome().equalsIgnoreCase(nome)) {
                 animaisFiltrados.remove(animal);
@@ -105,21 +101,22 @@ public class AnimalController {
     @PUT
     @Consumes("application/json")
     @Produces("application/json")
-    public Response atualizaAnimal(@Valid AnimalConsulta animalConsulta) {
+    public Response atualizaAnimal(@Valid Animal animal) {
 
         List<Animal> animais = criarListaDeAnimaisComId();
 
-        for(Animal animal : animais) {
-            if (Objects.equals(animal.getId(), animalConsulta.getId())) {
+        for (Animal a : animais) {
+            if (animal.getId().equals(a.getId())) {
+                a.setNome(animal.getNome());
+                a.setEspecie(animal.getEspecie());
                 return Response
-                        .ok(animal)
+                        .ok(a)
                         .build();
             }
         }
         return Response
-                .noContent()
+                .status(404)
                 .build();
-
     }
 
     private List<Animal> criarListaDeAniamis() {

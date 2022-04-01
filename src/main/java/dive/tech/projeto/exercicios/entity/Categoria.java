@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-public class Animal implements Serializable {
+public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -13,13 +13,20 @@ public class Animal implements Serializable {
 
     @NotNull
     @Size(min = 3, message = "O nome precisa ter no mínimo 3 caracteres!")
-//    @Max(value = 20, message = "O nome precisa ter no máximo 20 caracteres!")
     @Size(max = 20, message = "O nome precisa ter no máximo 20 caracteres!")
     private String nome;
 
-    @NotNull
-    @Size(min = 5, message = "A espécie precisa ter no mínimo 5 caracteres!")
-    private String especie;
+    public Categoria(int k) {
+        this.id = (long) k;
+        this.nome = "Categoria "+k;
+    }
+
+    public Categoria(String nome) {
+        this.nome = nome;
+    }
+
+    public Categoria() {
+    }
 
     public Long getId() {
         return id;
@@ -35,22 +42,5 @@ public class Animal implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(String especie) {
-        this.especie = especie;
-    }
-
-    @Override
-    public String toString() {
-        return "Animal{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", especie='" + especie + '\'' +
-                '}';
     }
 }

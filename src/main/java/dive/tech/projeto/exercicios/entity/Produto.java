@@ -1,10 +1,12 @@
 package dive.tech.projeto.exercicios.entity;
 
+import dive.tech.projeto.exercicios.entity.Categoria;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-public class Animal implements Serializable {
+public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -13,13 +15,24 @@ public class Animal implements Serializable {
 
     @NotNull
     @Size(min = 3, message = "O nome precisa ter no mínimo 3 caracteres!")
-//    @Max(value = 20, message = "O nome precisa ter no máximo 20 caracteres!")
     @Size(max = 20, message = "O nome precisa ter no máximo 20 caracteres!")
     private String nome;
 
     @NotNull
-    @Size(min = 5, message = "A espécie precisa ter no mínimo 5 caracteres!")
-    private String especie;
+    private Categoria categoria;
+
+    public Produto(int j) {
+        this.id = (long) j;
+        this.nome = "Produto "+j;
+    }
+
+    public Produto(String nome, Categoria categoria) {
+        this.nome = nome;
+        this.categoria = categoria;
+    }
+
+    public Produto() {
+    }
 
     public Long getId() {
         return id;
@@ -37,20 +50,11 @@ public class Animal implements Serializable {
         this.nome = nome;
     }
 
-    public String getEspecie() {
-        return especie;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setEspecie(String especie) {
-        this.especie = especie;
-    }
-
-    @Override
-    public String toString() {
-        return "Animal{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", especie='" + especie + '\'' +
-                '}';
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

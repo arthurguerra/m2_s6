@@ -14,6 +14,22 @@ public class EscolaDao {
         return consultarEscolasNoBancoViaSql();
     }
 
+    public List<Turma> consultarTurmasPorIds(List<Long> idsTurma) {
+        // Aqui fingimos que estamos consultando no banco de dados.
+        // Então, para cada ID passado, criamos um objeto Turma com ID e nome
+        return idsTurma
+                .stream()
+                .map(Turma::new)
+                .collect(Collectors.toList());
+    }
+
+    public void salvarEscolaNoBanco(Escola escola) {
+        // Aqui fingimos que estamos cadastrando no banco.
+        // Quando cadastramos no banco, não passamos o ID, pois quem gera o ID é o próprio banco.
+        // Então o que fazemos aqui é simular a criação desse ID:
+        escola.setId(1L);
+    }
+
     private List<Escola> consultarEscolasNoBancoViaSql() {
         List<Escola> escolas = new ArrayList<>();
 
@@ -33,21 +49,5 @@ public class EscolaDao {
             escolas.add(escola);
         }
         return escolas;
-    }
-
-    public List<Turma> consultarTurmasPorIds(List<Long> idsTurma) {
-        // Aqui fingimos que estamos consultando no banco de dados.
-        // Então, para cada ID passado, criamos um objeto Turma com ID e nome
-        return idsTurma
-                .stream()
-                .map(Turma::new)
-                .collect(Collectors.toList());
-    }
-
-    public void salvarEscolaNoBanco(Escola escola) {
-        // Aqui fingimos que estamos cadastrando no banco.
-        // Quando cadastramos no banco, não passamos o ID, pois quem gera o ID é o próprio banco.
-        // Então o que fazemos aqui é simular a criação desse ID:
-        escola.setId(1L);
     }
 }
