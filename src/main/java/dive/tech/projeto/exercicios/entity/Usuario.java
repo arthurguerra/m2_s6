@@ -2,6 +2,8 @@ package dive.tech.projeto.exercicios.entity;
 
 import dive.tech.projeto.exercicios.entity.Produto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -16,6 +18,7 @@ public class Usuario implements Serializable {
     private Long id;
 
     @NotNull
+    @NotBlank
     @Size(min = 3, message = "O nome precisa ter no mínimo 3 caracteres!")
     @Size(max = 20, message = "O nome precisa ter no máximo 20 caracteres!")
     private String nome;
@@ -24,6 +27,7 @@ public class Usuario implements Serializable {
     private boolean ativo;
 
     @NotNull
+    @NotEmpty
     private List<Produto> produtos;
 
     public Usuario(int id) {

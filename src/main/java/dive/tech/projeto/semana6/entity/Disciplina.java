@@ -1,18 +1,18 @@
 package dive.tech.projeto.semana6.entity;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
+//@Entity
 public class Disciplina implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+//    @Column(nullable = false, unique = true)
     private String nome;
 
     public Disciplina() {

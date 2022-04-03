@@ -5,6 +5,7 @@ import dive.tech.projeto.exercicios.service.UsuarioService;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -39,7 +40,7 @@ public class UsuarioController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response cadastrarUsuario(Usuario usuario,
+    public Response cadastrarUsuario(@Valid Usuario usuario,
                                      @HeaderParam("Authorization") String authorization,
                                      @QueryParam("id") Long id) {
 
@@ -47,9 +48,6 @@ public class UsuarioController {
             return retornaNotFound();
         }
         try {
-//            if (id == null) {
-//                id = (long) (Math.random() * (100 - 1) + 1);
-//            }
             Usuario usuarioCriado = usuarioService.cadastrarUsuario(usuario);
 
             return Response
@@ -124,7 +122,10 @@ public class UsuarioController {
     @GET
     @Path("/html")
     @Produces(MediaType.TEXT_HTML)
-    public String criarHtmlComListaDeUsuarios() {
+    public Response criarHtmlComListaDeUsuarios(@HeaderParam("Authorization") String authorization) {
+        if (!validaAuthorization(authorization)) {
+            return retornaNotFound();
+        }
         String html = "<html><ul>";
         List<Usuario> usuarios = usuarioService.listarUsuarios();
 
@@ -133,7 +134,9 @@ public class UsuarioController {
         }
 
         html += "</ul></html>";
-        return html;
+        return Response
+                .ok(html)
+                .build();
     }
 
     private boolean validaAuthorization(String authorization) {

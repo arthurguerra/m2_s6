@@ -45,34 +45,10 @@ public class UsuarioDao {
         return null;
     }
 
-    public void salvarUsuarioNoBanco(Usuario usuario) {
+    public Usuario salvarUsuarioNoBanco(Usuario usuario) {
         usuarios.add(usuario);
-//        usuarios.add(usuario);
-//        usuario.getProdutos()
-//                .forEach(p -> getProdutos().add(p));
-//        usuario.getProdutos()
-//                .stream()
-//                .map(Produto::getCategoria)
-//                .forEach(c -> getCategorias().add(c));
+
+        return usuario;
     }
 
-    private List<Usuario> criaListaUsuarios() {
-        List<Usuario> usuarios = new ArrayList<>();
-
-        for (int i = 1; i < 3; i++) {
-            Usuario usuario = new Usuario(i);
-
-            for (int j = 1; j < 4; j++) {
-                Produto produto = new Produto(j);
-                Categoria categoria = new Categoria(j);
-                produto.setCategoria(categoria);
-
-                usuario.getProdutos().add(produto);
-            }
-
-            usuarios.add(usuario);
-        }
-
-        return usuarios;
-    }
 }

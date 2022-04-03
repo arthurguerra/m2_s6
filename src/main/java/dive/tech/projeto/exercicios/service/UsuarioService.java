@@ -23,10 +23,10 @@ public class UsuarioService {
 
     public Usuario cadastrarUsuario(Usuario usuario) throws Exception {
         validarUsuario(usuario);
-//        validarIdExistente(id);
+        validarIdExistente(usuario.getId());
 
-        usuarioDao.salvarUsuarioNoBanco(usuario);
-        return usuario;
+        return usuarioDao.salvarUsuarioNoBanco(usuario);
+
     }
 
     public Usuario atualizaUsuario(Usuario novoUsuario, Long id) throws Exception {
